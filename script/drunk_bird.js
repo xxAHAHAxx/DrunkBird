@@ -323,45 +323,38 @@ function initialize(){
     }
     },10);
 
-    document.addEventListener('keydown',function(pressButton){
-        audio.play();
-        if (audio.paused){
-            audio.play()}
-        console.log(pressButton.code);
-
-        if(pressButton.code == 'Space' || pressButton.code == "KeyW" || pressButton.code == "ArrowUp" || pressButton.code == "KeyK"){
-            if (birdspeed==0){
-                birdspeed = speedmax;
-                birdcondition=1;//1 means jumping
-            }        
-        }
-        if(pressButton.code == 'KeyR'){
-            if(gamecondition==1){
-                again=1;
-            }
-        }
-    })
-    document.addEventListener('touch',function(pressButton){
-        audio.play();
-        if (audio.paused){
-            audio.play()}
-        console.log(pressButton.code);
-
-        if (birdspeed==0){
-            birdspeed = speedmax;
-            birdcondition=1;//1 means jumping
-        }        
-    })
-    document.addEventListener('click',function(pressButton){
-        audio.play();
-        if (audio.paused){
-            audio.play()}
-        console.log(pressButton.code);
-
-        if (birdspeed==0){
-            birdspeed = speedmax;
-            birdcondition=1;//1 means jumping
-        }        
-    })
 }
 
+function playAudio() {
+    audio.play().catch(function () {});
+}
+
+function jump() {
+    if (gamecondition === 0 && birdspeed === 0) {
+        birdspeed = speedmax;
+        birdcondition = 1;
+    }
+}
+
+document.addEventListener('keydown', function (event) {
+    var jumpKeys = ['Space', 'KeyW', 'ArrowUp', 'KeyK'];
+    if (jumpKeys.indexOf(event.code) === -1 && event.code !== 'KeyR') return;
+    event.preventDefault();
+    playAudio();
+    if (event.code === 'KeyR') {
+        if (gamecondition === 1) again = 1;
+    } else {
+        jump();
+    }
+});
+
+canvas.addEventListener('pointerdown', function (event) {
+    if (!event.isPrimary || event.button !== 0) return;
+    event.preventDefault();
+    playAudio();
+    if (gamecondition === 1) {
+        again = 1;
+    } else {
+        jump();
+    }
+});

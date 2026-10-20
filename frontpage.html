@@ -9,12 +9,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100svh;
+      padding: 8px;
+      box-sizing: border-box;
       margin: 0;
     }
 
     canvas {
       border: 1px solid #000;
+      box-sizing: border-box;
+      width: min(100%, 1000px, calc(175svh));
+      height: auto;
+      display: block;
       cursor: pointer;
     }
 </style>
@@ -27,6 +33,7 @@
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     var page = new Image();
+    page.onload = drawI;
     page.src = './static/frontpage.jpg';
 
     function drawI(){
@@ -34,8 +41,9 @@
     }
 
     canvas.addEventListener("click", function(event) {
-      var x = event.clientX - canvas.getBoundingClientRect().left;
-      var y = event.clientY - canvas.getBoundingClientRect().top;
+      var rect = canvas.getBoundingClientRect();
+      var x = (event.clientX - rect.left) * canvas.width / rect.width;
+      var y = (event.clientY - rect.top) * canvas.height / rect.height;
 
 
     if (x >= 375 && x <= 650 && y >= 190 && y <= 250) {
