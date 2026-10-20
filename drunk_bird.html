@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrunkBird</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body onload='initialize();'>
+    <h1>Drunk Bird</h1>
+    <script>
+        var audio = new Audio();
+        audio.src = './static/bgm.mp3';
+        audio.addEventListener('canplaythrough',function(){
+            console.log('Audio is ready to play.')
+        })
+    </script>
+    <div><canvas id='canvas' width='1000' height='550'></canvas></div>
+    <div><h2>Score:<span id='timer'>0</span></h2></div>
+    <script src='./script/drunk_bird.js'></script>
+    </body>
+</html>

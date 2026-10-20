@@ -1,0 +1,54 @@
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WELCOME</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    canvas {
+      border: 1px solid #000;
+      cursor: pointer;
+    }
+</style>
+</head>
+<body onload="drawI()">
+  <canvas id="myCanvas" width="1000" height="550"></canvas>
+
+  <script>
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var page = new Image();
+    page.src = './static/frontpage.jpg';
+
+    function drawI(){
+        ctx.drawImage(page, 0, 0, 1000, 550);
+    }
+
+    canvas.addEventListener("click", function(event) {
+      var x = event.clientX - canvas.getBoundingClientRect().left;
+      var y = event.clientY - canvas.getBoundingClientRect().top;
+
+
+    if (x >= 375 && x <= 650 && y >= 190 && y <= 250) {
+
+        window.location.href = "./drunk_bird.html";
+    }
+      if (x >= 375 && x <= 650 && y >= 290 && y <= 350) {
+
+        window.location.href = "./Introduction.html";
+    }
+    });
+
+  </script>
+</body>
+</html>
+
